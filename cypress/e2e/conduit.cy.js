@@ -59,9 +59,10 @@ describe('E2E Tests using Cypress', () => {
     cy.contains('Your Settings').should('be.visible')
 
     // Kliknij w link "Logout"
-    cy.get('a.nav-link').contains('Or click here to logout.').click()
+    cy.contains('Or click here to logout.').click()
 
-
+    // Asercja, że wyświetla się "Global Feed"
+    cy.contains('Global Feed').should('be.visible')
 
   })
 })
