@@ -1,7 +1,11 @@
 import faker from 'faker';
 
 describe('E2E Tests using Cypress', () => {
-  it('should visit the Conduit website, click Sign up link, fill out the registration form, and publish an article', () => {
+  it('should visit the Conduit website, click Sign up link, fill out the registration form, and publish an article, logout', () => {
+    
+    // Ustawienie szerokości i wysokości ekranu na 1200x800
+    cy.viewport(1200, 800);
+    
     // Odwiedź stronę Conduit
     cy.visit('https://conduit.mate.academy/')
 
@@ -48,11 +52,16 @@ describe('E2E Tests using Cypress', () => {
     // Asercja, że komentarz został dodany poprawnie
     cy.contains(commentContent).should('be.visible')
 
-    // Usuń komentarz
-    cy.contains('a.comment-author', { text: username }).parent('.card-footer').find('.mod-options').click()
+    // Kliknij w link "Settings"
+    cy.get('a.nav-link').contains('Settings').click()
 
-    // Asercja, że komentarz został usunięty
-    cy.contains(commentContent).should('not.exist')m
+    // Asercja, że wyświetlają się ustawienia profilu
+    cy.contains('Your Settings').should('be.visible')
+
+    // Kliknij w link "Logout"
+    cy.get('a.nav-link').contains('Or click here to logout.').click()
+
+
 
   })
 })
